@@ -16,6 +16,7 @@ class BingoBoard:
         }
         self.createBoard(input_board)
         self.winning_score = 0
+        self.bingo_count = 0
 
     def createBoard(self, input_board):
         for i in range(5):
@@ -38,17 +39,19 @@ class BingoBoard:
 
     def checkBingo(self, draw):
         board_sum = 0
-        if 5 in self.bingo["row"] or 5 in self.bingo["col"]:
-            for i in range(5):
-                for j in range(5):
-                    if self.playBoard[i][j] == 'X':
-                        pass
-                    else:
-                        board_sum += self.playBoard[i][j]
-            self.winning_score = board_sum * draw
-            return "BINGO"
-        else:
-            return "no bingo"
+        if self.bingo_count == 0:
+            if 5 in self.bingo["row"] or 5 in self.bingo["col"]:
+                for i in range(5):
+                    for j in range(5):
+                        if self.playBoard[i][j] == 'X':
+                            pass
+                        else:
+                            board_sum += self.playBoard[i][j]
+                self.winning_score = board_sum * draw
+                self.bingo_count = 1
+                return "BINGO"
+            else:
+                return "no bingo"
 
 
 class BingoSubsystems:
@@ -77,7 +80,6 @@ for draw in bingo.draw_list:
         if item.checkBingo(draw) == "BINGO":
             print("winning board: ", item.playBoard)
             print("winning score: ", item.winning_score)
-            break
     else:
         continue
-    break
+
