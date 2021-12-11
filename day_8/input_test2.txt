@@ -1,0 +1,74 @@
+be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
+fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
+fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
+aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea
+fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb
+dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe
+bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
+egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
+gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
+
+
+cfbegad cbdgef fgaecd fdcge agebfd fabcd | fdgacbe cefdb cefbgd gcbe
+
+be: 1
+
+T:
+TR: be
+TL:
+M:
+BL:
+BR: be
+B:
+
+
+edb: 7
+
+T: d
+TR: be
+TL:
+M:
+BL:
+BR: be
+B:
+
+
+cgeb: 4
+
+T: d
+TR: be
+TL: cg
+M: cg
+BL:
+BR: be
+B:
+
+fecdb: 3 #found this using 'by finding the list of 5 that contains all of 7 list'
+
+T: d
+TR: be
+TL: g
+M: c   #we know now C is in the middle so now g is TL
+BL:
+BR: be
+B: f #leaving f in the bottom
+
+fdcge: 5 #find using contains T,TL, M, BR, B so in this case it should be d,g,c,b or e,f = fdcge meaning BR = e
+            and TR = b this leaves BL to be A.
+
+T: d
+TR: b
+TL: g
+M: c   #we know now C is in the middle so now g is TL
+BL:
+BR: e
+B: f #leaving f in the bottom
+
+T: d
+TR: b
+TL: g
+M: c   #we know now C is in the middle so now g is TL
+BL: a
+BR: e
+B: f #leaving f in the bottom
