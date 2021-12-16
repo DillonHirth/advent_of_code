@@ -1,8 +1,8 @@
 # PART 1
 low_points = []
+basin_dict = {}
 def check_basin_crawler(point):
     points = []
-    #print("point to check: ", point)
     row = point[0]
     col = point[1]
     if row == 0:
@@ -61,13 +61,11 @@ def check_basin(point):
             if item not in basin_found:
                 basin_found.append(item)
         if to_search:
-            #print("searching:", to_search)
             pass
         else:
-            #print("empty")
             search = False
-    #print("completed_search: ", completed_search)
-    print("Basin_Found:", basin_found)
+    basin_dict[point] = len(basin_found)
+
 
 
 def check_horizontal(row_col_tuple):
@@ -128,7 +126,7 @@ def risk_level(in_list):
 
 
 
-with open('input_test.txt') as input_file:
+with open('input.txt') as input_file:
     input_list = []
     for line in input_file:
         input_list.append(list(line.strip('\n')))
@@ -137,6 +135,9 @@ print("Risk: ", risk)
 print("Low Points: ", low_points)
 for point in low_points:
     check_basin(point)
-
-#so, i pass a cord to a method, it starts a set, then grabs all adjacent to that coord, adds to set if not 9.
-#then, for each item in set, check adjacent again and add any not 9's to the set, then go through the set again.
+my_keys = sorted(basin_dict, key=basin_dict.get, reverse=True)[:3]
+print(my_keys)
+total = 1
+for key in my_keys:
+    total *= basin_dict[key]
+print(total)
