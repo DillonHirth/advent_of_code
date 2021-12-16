@@ -135,9 +135,9 @@ print("Risk: ", risk)
 print("Low Points: ", low_points)
 for point in low_points:
     check_basin(point)
-my_keys = sorted(basin_dict, key=basin_dict.get, reverse=True)[:3]
-print(my_keys)
+top_three = sorted(basin_dict, key=basin_dict.get, reverse=True)[:3]
+print(top_three)
 total = 1
-for key in my_keys:
+for key in top_three:
     total *= basin_dict[key]
 print(total)
