@@ -2,7 +2,8 @@
 syntax_open = {'[':']', '{':'}', '(':')', '<':'>'}
 syntax_closed = {']':'[', '}':'{', ')':'(', '>':'<'}
 score_dict = {']':0, '}':0, '>':0, ')':0}
-score = 0
+part2_score = []
+incompletes = []
 
 def traversal(list):
     for i in range(len(list)-1):
@@ -13,150 +14,40 @@ def traversal(list):
     print(''.join(list))
     return list
 
+def part2_scoring(list):
+    score_dict_part2 = {'[': 2, '{': 3, '<': 4, '(': 1}
+    score = 0
+    for item in reversed(list):
+        print("score: ", score)
+        score = (score * 5) + score_dict_part2[item]
+        print("score now:", score)
+    return score
+
 def scoring(list):
+    error = False
+
     for i in range(len(list)):
         if list[i] in syntax_closed.keys() and syntax_closed[list[i]] != list[i-1]:
             print("error:",list[i])
             score_dict[list[i]] += 1
+            error = True
             return score_dict
-        else:
-            return "dank"
+    if error == False:
+        print('found incomplete', list)
+        incompletes.append(list)
 
 with open('input.txt') as input_file:
     for line in input_file:
         scoring(traversal(list(line.strip('\n'))))
-score += score_dict[']'] * 57
-score += score_dict[')'] * 3
-score += score_dict['}'] * 1197
-score += score_dict['>'] * 25137
-print(score)
 
+part1_score = 0
+part1_score += score_dict[']'] * 57
+part1_score += score_dict[')'] * 3
+part1_score += score_dict['}'] * 1197
+part1_score += score_dict['>'] * 25137
+print("part1: ", part1_score)
 
-
-
-# from statistics import median
-#
-# corrupt_scores = {
-#     ")": 3,
-#     "]": 57,
-#     "}": 1197,
-#     ">": 25137,
-# }
-# incomplete_scores = {
-#     ")": 1,
-#     "]": 2,
-#     "}": 3,
-#     ">": 4,
-# }
-# matches = {
-#     "(": ")",
-#     "[": "]",
-#     "{": "}",
-#     "<": ">",
-# }
-#
-#
-# def part_one(filename: str) -> int:
-#     with open(filename) as f:
-#         lines = map(lambda line: line.strip(), f.readlines())
-#
-#     total = 0
-#     for line in lines:
-#         queue = []
-#         for ch in line:
-#             if ch in matches:
-#                 queue.append(matches[ch])
-#             else:
-#                 if not queue or ch != queue.pop():
-#                     print(corrupt_scores[ch])
-#                     total += corrupt_scores[ch]
-#                     break
-#
-#     return total
-#
-#
-# def part_two(filename: str) -> int:
-#     with open(filename) as f:
-#         lines = map(lambda line: line.strip(), f.readlines())
-#
-#     scores = []
-#     for line in lines:
-#         queue = []
-#         is_corrupted = False
-#         for ch in line:
-#             if ch in matches:
-#                 queue.append(matches[ch])
-#             else:
-#                 if not queue or ch != queue.pop():
-#                     is_corrupted = True
-#                     break
-#         if not is_corrupted:
-#             score = 0
-#             while queue:
-#                 ch = queue.pop()
-#                 score = 5 * score + incomplete_scores[ch]
-#             scores.append(score)
-#
-#     return median(scores)
-#
-#
-# if __name__ == "__main__":
-#     input_path = "input.txt"
-#     print("---Part One---")
-#     print(part_one(input_path))
-#
-#     print("---Part Two---")
-#     print(part_two(input_path))
-
-# 3
-# 3
-# 25137
-# 3
-# 3
-# 25137
-# 57
-# 3
-# 57
-# 1197
-# 1197
-# 1197
-# 3
-# 57
-# 57
-# 57
-# 25137
-# 57
-# 57
-# 25137
-# 1197
-# 25137
-# 3
-# 3
-# 1197
-# 1197
-# 3
-# 25137
-# 25137
-# 25137
-# 57
-# 1197
-# 25137
-# 3
-# 25137
-# 57
-# 57
-# 3
-# 3
-# 1197
-# 3
-# 3
-# 3
-# 57
-# 3
-# 25137
-# 25137
-# 25137
-# 57
-# 25137
-# 25137
-
+for item in incompletes:
+    part2_score.append(part2_scoring(item))
+middle_score = sorted(part2_score)
+print("part2: ", middle_score[len(middle_score)//2])
