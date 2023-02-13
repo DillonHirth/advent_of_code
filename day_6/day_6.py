@@ -63,3 +63,4 @@ count = 0
 for value in fish_school.school_of_fish.values():
     count += value
 print("count: ", count)
+

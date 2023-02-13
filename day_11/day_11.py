@@ -21,7 +21,10 @@ class indecent_flashing_octopus:
             self.has_flashed = True
             for pair in self.surrounding:
                 try:
-                    input_matrix[pair[0]][pair[1]].increment()
+                    if input_matrix[pair[0]][pair[1]].age > 9 and input_matrix[pair[0]][pair[1]].has_flashed != True:
+                        input_matrix[pair[0]][pair[1]].cascading_flash()
+                    else:
+                        input_matrix[pair[0]][pair[1]].increment()
                 except IndexError:
                     pass
 
